@@ -1,0 +1,32 @@
+### Buscar todo os ID
+GET http://localhost:3000/user/
+
+### Buscar ID especifico
+GET http://localhost:3000/user/
+
+### Inserir Informação no banco
+POST http://localhost:3000/user/
+content-type: application/json
+
+{
+  "name": "Robson",
+  "endereco": "Rua n sei",
+  "cep": "312312-312",
+  "cpf": "123.345.678.00",
+  "saldo": "50"
+}
+
+### Deletar um usuario pelo ID no banco
+DELETE http://localhost:3000/user/7fde2b5f-648b-4bb0-b00b-96f25bdfea49
+
+### Atualizar um usuario pelo ID no Banco
+PUT http://localhost:3000/user/226ca25e-e2cd-4c32-b24e-297e015d4e19
+content-type: application/json
+
+{
+  "name": "Robson",
+  "endereco": "Rua esqueci",
+  "cep": "312312-900",
+  "cpf": "123.345.999.00",
+  "saldo": "-60"
+}
