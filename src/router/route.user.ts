@@ -1,6 +1,7 @@
-import { Router } from "express";
+import { response, Router } from "express";
 import { randomUUID } from "node:crypto";
-import { Database } from "../src/database";
+import { request } from "node:http";
+import { Database } from "../database";
 
 const userRoute = Router();
 
@@ -88,5 +89,24 @@ userRoute.put("/:id", (request, response) => {
 
   response.status(201).json({ msg: `O ID: {${id}} foi alterado banco` });
 });
+
+//SALDO DA CONTA
+userRoute.get("/saldo/:id", (request, response) => {
+  const { id } = request.params;
+
+  const userExist: any = database.select(table, id);
+
+  if (userExist === undefined)
+    return response.status(400).json({ msg: "Usuário não encontrado!" });
+
+  response
+  .status(201)
+  .json({ msg: `Saldo de ${userExist.name}: ${userExist.saldo}` })
+});
+
+//DEPOSITAR
+userRoute.put("/:id/deposito", (request, response) => {
+  
+})
 
 export { userRoute };

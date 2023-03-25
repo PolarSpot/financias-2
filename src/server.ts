@@ -1,7 +1,7 @@
 import express from "express";
 import { randomUUID } from "node:crypto";
 import { Database } from "./database";
-import { router } from "../router";
+import { router } from "./router/index";
 
 
 const server = express();

@@ -9,7 +9,10 @@ interface IDatabase {
   cep: string
   cpf: number
   saldo: number
-  operacao: []
+  operacao: [{
+    tipo: string
+    valor: number
+  }]
 }
 
 export class Database {
@@ -24,10 +27,12 @@ export class Database {
       });
   }
 
+  //Envia as informações para o banco de dados (db.json)
   #persist() {
     fs.writeFile(databasePath, JSON.stringify(this.#database, null, 2));
   }
 
+  //seleciona os dados dentro do banco
   select(table: any, id?: string):IDatabase[] {
     let data = this.#database[table] ?? []
     //"??" Verifica se a condição anterior a ele é "null" ou "undefined", se for o caso, realiza o comando posterior a ele
@@ -41,6 +46,7 @@ export class Database {
     return data
   }
 
+  //Insere dados dentro do banco
   insert(table: any, data: IDatabase): IDatabase {
     if (Array.isArray(this.#database[table])){
       // Se sim, entra aqui
@@ -54,6 +60,7 @@ export class Database {
     return data
   }
 
+  //deleta dados dentro do banco
   delete(table:any, id:string): void{
     const rowIndex = this.#database[table].findIndex(
       (row:any) => row.id === id);
@@ -64,6 +71,7 @@ export class Database {
     }
   }
 
+  //atualiza dados dentro do banco
   update(table: any, id: string, data: IDatabase): void {
     const rowIndex = this.#database[table].findIndex(
       (row: any) => row.id === id
