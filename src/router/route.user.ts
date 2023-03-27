@@ -110,7 +110,7 @@ userRoute.get("/saldo/:id", (request, response) => {
   .json({ msg: `Saldo de ${userExist.name}: ${userExist.saldo}` })
 });
 
-//DEPOSITAR (ajuda, e muita do Juan por call do Discord)
+//DEPOSITAR (ajuda do Juan por call do Discord)
 userRoute.put('/deposito/:id', (request,response)=>{
 
   const { id } = request.params;
@@ -134,7 +134,7 @@ userRoute.put('/deposito/:id', (request,response)=>{
 
 });
 
-//SAQUE (ajuda, e muita do Juan por call do Discord)
+//SAQUE (ajuda do Juan por call do Discord)
 userRoute.put('/saque/:id', (request,response)=>{
   
   const { id } = request.params;
