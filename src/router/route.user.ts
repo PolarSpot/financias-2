@@ -28,7 +28,9 @@ userRoute.get("/:id", (request, response) => {
   // console.log(result, " - ", typeof result);
 
   if (result === undefined)
-    response.status(400).json({ msg: "Usuário não encontrado!" });
+    response
+            .status(400)
+            .json({ msg: "Usuário não encontrado!" });
 
   response.json(result);
 });
@@ -54,7 +56,9 @@ userRoute.post("/", (request, response) => {
   //database.insert('onde será inserido', 'o que será inserido')
   database.insert(table, user);
 
-  response.status(201).json({ msg: "sucesso!" });
+  response
+          .status(201)
+          .json({ msg: "sucesso!" });
 });
 
 //DELETAR
@@ -71,7 +75,9 @@ userRoute.delete("/:id", (request, response) => {
 
   database.delete(table, id);
 
-  response.status(202).json({ msg: `Usuário ${userExist.name} foi deletado do banco` });
+  response
+          .status(202)
+          .json({ msg: `Usuário ${userExist.name} foi deletado do banco` });
 });
 
 //EDITAR
@@ -104,7 +110,7 @@ userRoute.get("/saldo/:id", (request, response) => {
   .json({ msg: `Saldo de ${userExist.name}: ${userExist.saldo}` })
 });
 
-//DEPOSITAR
+//DEPOSITAR (ajuda, e muita do Juan por call do Discord)
 userRoute.put('/deposito/:id', (request,response)=>{
 
   const { id } = request.params;
@@ -128,7 +134,7 @@ userRoute.put('/deposito/:id', (request,response)=>{
 
 });
 
-//SAQUE
+//SAQUE (ajuda, e muita do Juan por call do Discord)
 userRoute.put('/saque/:id', (request,response)=>{
   
   const { id } = request.params;
@@ -139,7 +145,7 @@ userRoute.put('/saque/:id', (request,response)=>{
   
   if(userExist === undefined)
     return response
-                   .status(400)
+                    .status(400)
                     .json({msg:'Erro! Esse usuário não foi encontrado no sistema.'});
 
   if(userExist.saldo >= Number(valor)) {
@@ -153,7 +159,6 @@ userRoute.put('/saque/:id', (request,response)=>{
             .json({msg: `Sucesso! Foi retirado o valor de R$${valor}`});
 
     } else {
-
       response
               .status(404)
               .json({msg: `Erro! Você não possuí dinheiro o suficiente para realizar esta transação`});
