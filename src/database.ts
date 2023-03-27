@@ -2,21 +2,9 @@ import fs from "node:fs/promises"
 
 const databasePath = new URL('../db.json', import.meta.url)
 
-interface IDatabase {
-  id: string
-  name: string
-  endereco: string
-  cep: string
-  cpf: number
-  saldo: number
-  operacao: [{
-    tipo: string
-    valor: number
-  }]
-}
 
 export class Database {
-  #database: IDatabase[][] = [];
+  #database: any = {};
 
   constructor(){
     fs.readFile(databasePath, 'utf8')
@@ -33,7 +21,7 @@ export class Database {
   }
 
   //seleciona os dados dentro do banco
-  select(table: any, id?: string):IDatabase[] {
+  select(table: any, id?: string):object {
     let data = this.#database[table] ?? []
     //"??" Verifica se a condição anterior a ele é "null" ou "undefined", se for o caso, realiza o comando posterior a ele
 
@@ -41,13 +29,13 @@ export class Database {
       data = data.find((row: any) => {
         return row.id === id;
       });
-    }
+    };
 
     return data
   }
 
   //Insere dados dentro do banco
-  insert(table: any, data: IDatabase): IDatabase {
+  insert(table: any, data: object): object {
     if (Array.isArray(this.#database[table])){
       // Se sim, entra aqui
       this.#database[table].push(data);
@@ -61,7 +49,7 @@ export class Database {
   }
 
   //deleta dados dentro do banco
-  delete(table:any, id:string): void{
+  delete(table: string, id: string): void{
     const rowIndex = this.#database[table].findIndex(
       (row:any) => row.id === id);
 
@@ -72,7 +60,7 @@ export class Database {
   }
 
   //atualiza dados dentro do banco
-  update(table: any, id: string, data: IDatabase): void {
+  update(table: string, id: string, data: object): void {
     const rowIndex = this.#database[table].findIndex(
       (row: any) => row.id === id
     );

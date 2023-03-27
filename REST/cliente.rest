@@ -2,9 +2,9 @@
 GET http://localhost:3000/user/
 
 ### Buscar ID especifico
-GET http://localhost:3000/user/"id"
+GET http://localhost:3000/user/id:
 
-### Inserir Informação no banco
+### Criar um cadastro
 POST http://localhost:3000/user/
 content-type: application/json
 
@@ -17,10 +17,10 @@ content-type: application/json
 }
 
 ### Deletar um usuario pelo ID no banco
-DELETE http://localhost:3000/user/
+DELETE http://localhost:3000/user/id:
 
 ### Atualizar um usuario pelo ID no Banco
-PUT http://localhost:3000/user/86fbd27d-5e60-4840-b0bb-24a90e336cda
+PUT http://localhost:3000/user/id:
 content-type: application/json
 
 {
@@ -31,4 +31,23 @@ content-type: application/json
 }
 
 ### Busca o saldo de uma conta
-GET http://localhost:3000/user/saldo/43f90661-4f34-48f5-8977-8b7abf748524
+GET http://localhost:3000/user/saldo/id:
+
+### Realizar deposito
+PUT http://localhost:3000/user/deposito/id:
+content-type: application/json
+
+
+{
+  "tipo": "deposito",
+  "valor": 100
+}
+
+### Realizar saque
+PUT http://localhost:3000/user/saque/id:
+content-type: application/json
+
+{ 
+"tipo": "saque",
+"valor": 100
+}
