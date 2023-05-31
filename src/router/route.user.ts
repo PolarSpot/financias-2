@@ -93,4 +93,79 @@ userRoute.put("/:id", (request, response) => {
   response.status(201).json({ msg: `O ID: {${id}} foi alterado banco` });
 });
 
+<<<<<<< HEAD
+=======
+//SALDO DA CONTA
+userRoute.get("/saldo/:id", (request, response) => {
+  const { id } = request.params;
+
+  const userExist: any = database.select(table, id);
+
+  if (userExist === undefined)
+    return response.status(400).json({ msg: "Usuário não encontrado!" });
+
+  response
+  .status(201)
+  .json({ msg: `Saldo de ${userExist.name}: ${userExist.saldo}` })
+});
+
+//DEPOSITAR (ajuda do Juan por call do Discord)
+userRoute.put('/deposito/:id', (request,response)=>{
+
+  const { id } = request.params;
+  const {tipo, valor} = request.body;
+  const userExist:any = database.select(table, id);
+  let transacao = userExist.transacao;
+  let saldo = userExist.saldo;
+
+  if(userExist === undefined)
+    return response
+                    .status(400)
+                    .json({msg:'Erro! Esse usuário não foi encontrado no sistema.'});
+
+  transacao.push({tipo, valor});
+
+  database.update(table, id, {id, saldo: saldo + Number(valor), transacao});
+
+  response
+          .status(201)
+          .json({msg: `Sucesso! Foi depositado o valor de R$${valor}`});
+
+});
+
+//SAQUE (ajuda do Juan por call do Discord)
+userRoute.put('/saque/:id', (request,response)=>{
+  
+  const { id } = request.params;
+  const {tipo, valor} = request.body;
+  const userExist:any = database.select(table, id);
+  let transacao = userExist.transacao;
+  let saldo = userExist.saldo;
+  
+  if(userExist === undefined)
+    return response
+                    .status(400)
+                    .json({msg:'Erro! Esse usuário não foi encontrado no sistema.'});
+
+  if(userExist.saldo >= Number(valor)) {
+
+    transacao.push({tipo, valor});
+
+    database.update(table, id, {id, saldo: saldo - Number(valor), transacao});
+
+    response
+            .status(201)
+            .json({msg: `Sucesso! Foi retirado o valor de R$${valor}`});
+
+    } else {
+      response
+              .status(404)
+              .json({msg: `Erro! Você não possuí dinheiro o suficiente para realizar esta transação`});
+
+    }
+    
+});
+
+
+>>>>>>> 3ca5eca9b1eb7204524a34083dab0cd7f08c58d3
 export { userRoute };
