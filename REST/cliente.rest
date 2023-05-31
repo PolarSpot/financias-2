@@ -1,4 +1,4 @@
-### Buscar todo os ID
+### Buscar todo os IDs
 GET http://localhost:3000/user/
 
 ### Buscar ID especifico
@@ -9,45 +9,19 @@ POST http://localhost:3000/user/
 content-type: application/json
 
 {
-  "name": "Robson",
-  "endereco": "Rua n sei",
-  "cep": "312312-312",
-  "cpf": "123.345.678.00",
-  "saldo": "50"
+  "name": "FEMA 1", 
+  "avatar": "fema@fema.com", 
+  "celular": "+55 55 99912-1234"
 }
 
 ### Deletar um usuario pelo ID no banco
 DELETE http://localhost:3000/user/id:
-
 ### Atualizar um usuario pelo ID no Banco
 PUT http://localhost:3000/user/id:
 content-type: application/json
 
 {
-  "name": "Robson",
-  "endereco": "Rua esqueci",
-  "cep": "312312-900",
-  "cpf": "123.345.999.00"
-}
-
-### Busca o saldo de uma conta
-GET http://localhost:3000/user/saldo/id:
-
-### Realizar deposito
-PUT http://localhost:3000/user/deposito/id:
-content-type: application/json
-
-
-{
-  "tipo": "deposito",
-  "valor": 100
-}
-
-### Realizar saque
-PUT http://localhost:3000/user/saque/id:
-content-type: application/json
-
-{ 
-"tipo": "saque",
-"valor": 100
+  "name": "FEMA 2",
+  "avatar":"fema@fema.com", 
+  "celular": "+55 55 99987-876"
 }

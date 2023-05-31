@@ -1,13 +1,12 @@
+import cors from "cors";
 import express from "express";
-import { randomUUID } from "node:crypto";
-import { Database } from "./database";
 import { router } from "./router/index";
-
 
 const server = express();
 
 const port = 3000;
 
+server.use(cors())
 server.use(express.json());
 
 server.use(router);
